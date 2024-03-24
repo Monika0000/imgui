@@ -954,6 +954,9 @@ static void ImGui_ImplWin32_UpdateWindow(ImGuiViewport* viewport)
 static ImVec2 ImGui_ImplWin32_GetWindowPos(ImGuiViewport* viewport)
 {
     ImGui_ImplWin32_ViewportData* vd = (ImGui_ImplWin32_ViewportData*)viewport->PlatformUserData;
+    if (!vd) {
+        return ImVec2(0, 0);
+    }
     IM_ASSERT(vd->Hwnd != 0);
     POINT pos = { 0, 0 };
     ::ClientToScreen(vd->Hwnd, &pos);
@@ -999,6 +1002,9 @@ static void ImGui_ImplWin32_SetWindowFocus(ImGuiViewport* viewport)
 static bool ImGui_ImplWin32_GetWindowFocus(ImGuiViewport* viewport)
 {
     ImGui_ImplWin32_ViewportData* vd = (ImGui_ImplWin32_ViewportData*)viewport->PlatformUserData;
+    if (!vd) {
+        return false;
+    }
     IM_ASSERT(vd->Hwnd != 0);
     return ::GetForegroundWindow() == vd->Hwnd;
 }
@@ -1006,6 +1012,9 @@ static bool ImGui_ImplWin32_GetWindowFocus(ImGuiViewport* viewport)
 static bool ImGui_ImplWin32_GetWindowMinimized(ImGuiViewport* viewport)
 {
     ImGui_ImplWin32_ViewportData* vd = (ImGui_ImplWin32_ViewportData*)viewport->PlatformUserData;
+    if (!vd) {
+        return false;
+    }
     IM_ASSERT(vd->Hwnd != 0);
     return ::IsIconic(vd->Hwnd) != 0;
 }
@@ -1043,6 +1052,9 @@ static void ImGui_ImplWin32_SetWindowAlpha(ImGuiViewport* viewport, float alpha)
 static float ImGui_ImplWin32_GetWindowDpiScale(ImGuiViewport* viewport)
 {
     ImGui_ImplWin32_ViewportData* vd = (ImGui_ImplWin32_ViewportData*)viewport->PlatformUserData;
+    if (!vd) {
+        return 1.0f;
+    }
     IM_ASSERT(vd->Hwnd != 0);
     return ImGui_ImplWin32_GetDpiScaleForHwnd(vd->Hwnd);
 }

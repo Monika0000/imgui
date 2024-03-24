@@ -1111,7 +1111,7 @@ void ImGui_ImplVulkan_Shutdown()
     main_viewport->RendererUserData = NULL;
 
     // Clean up windows
-    ImGui_ImplVulkan_ShutdownPlatformInterface();
+    //ImGui_ImplVulkan_ShutdownPlatformInterface();
 
     io.BackendRendererName = NULL;
     io.BackendRendererUserData = NULL;
